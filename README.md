@@ -1,6 +1,3 @@
-Here’s a **professional `README.md` file** tailored for your Flutter project — **Wallpaper Studio App** — based on everything you’ve built so far (responsive UI, drawer, navbar, categories, etc.):
-
----
 
 ## 🖼️ Wallpaper Studio App
 
