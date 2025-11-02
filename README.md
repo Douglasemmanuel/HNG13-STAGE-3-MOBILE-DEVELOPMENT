@@ -1,16 +1,152 @@
-# wallpapper_studio_app
+Here’s a **professional `README.md` file** tailored for your Flutter project — **Wallpaper Studio App** — based on everything you’ve built so far (responsive UI, drawer, navbar, categories, etc.):
 
-A new Flutter project.
+---
 
-## Getting Started
+## 🖼️ Wallpaper Studio App
 
-This project is a starting point for a Flutter application.
+A beautifully designed **Flutter application** that allows users to explore, browse, and favorite stunning wallpapers.
+This project features a **fully responsive layout**, a **custom navigation drawer**, and an elegant, minimalist UI built with **Google Fonts** and **Material Design principles**.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 🚀 Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* **Responsive UI**
+
+  * Automatically adapts between mobile, tablet, and desktop screen sizes.
+  * Navbar for large screens and drawer for small screens.
+
+* **Navigation Drawer**
+
+  * Smooth slide-in drawer with interactive icons and routes.
+  * Active state highlighting for the selected screen.
+
+* **AppBar Design**
+
+  * Custom logo with border-bottom styling.
+  * Right-aligned hamburger menu for small screens.
+
+* **Dynamic Categories**
+
+  * Organized wallpaper collections with clean typography.
+  * Fully scrollable layout with responsive spacing.
+
+* **Interactive Elements**
+
+  * Clickable logo image that navigates to the home screen.
+  * Smooth transitions between screens using named routes.
+
+---
+
+### 🧱 Project Structure
+
+```
+lib/
+│
+├── main.dart 
+|-- app.dart
+| -- provider
+|      └── wallpapper_provider.dart                    
+│
+├── screens/
+│   └── initial_screen.dart  
+|   └── home_screen.dart  
+|   └── setting_screen.dart  
+|   └── favourites_screen.dart     
+|   └── wallpapper_screen.dart   
+|   └── browse_screen.dart   
+│
+├── utils/
+│   └── route_generator.dart   
+|   └── responsive_breakpoints.dart     
+│
+├── widgets/
+│   └── components/
+│       ├── navbar.dart          
+│       ├── navbar_drawer.dart    
+│       └── categories.dart      
+│
+└── assets/
+    └── images/                  
+```
+
+---
+
+### 🧩 Tech Stack
+
+* **Framework:** Flutter
+* **Language:** Dart
+* **UI Library:** Material Design
+* **Fonts:** Google Fonts (Poppins)
+* **Routing:** Named Routes (`RouteGenerator`)
+
+---
+
+### ⚙️ Installation & Setup
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/Douglasemmanuel/HNG13-STAGE-3-MOBILE-DEVELOPMENT.git
+   cd wallpaper_studio_app
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   flutter pub get
+   ```
+
+3. **Run the app:**
+
+   ```bash
+   flutter run
+   ```
+
+4. **(Optional)** For web:
+
+   ```bash
+   flutter run -d chrome
+   ```
+
+---
+
+### 📸 Screenshots
+
+* **Initial Screen**
+  <img src="assets/images/createproduct.jpeg" alt="Main Screen" width="400" height="500"/>
+
+* **Home Screen**
+  <img src="assets/images/productDetails.jpeg" alt="Main Screen" width="400" height="500"/>
+
+* **Browse Screen**
+  <img src="assets/images/editproduct.jpeg" alt="Main Screen" width="400" height="500"/>
+
+* **Setting Screen**
+  <img src="assets/images/searchproducts.jpeg" alt="Main Screen" width="400" height="500"/>
+
+* **Favourites Screen**
+  <img src="assets/images/homescreen.jpeg" alt="Main Screen" width="400" height="500"/>
+
+
+---
+
+## Deployed App
+
+Try the deployed web version of the app: [Live App Link]()
+
+---
+
+## Demo
+
+* **Video Demonstration:**
+  Watch the full workflow of the app in action: [Demo Video]()
+
+---
+
+### 🪪 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
