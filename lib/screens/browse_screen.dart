@@ -86,7 +86,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
               _BrowserHeader(context),
                if (!showActiveCategories) const Categories(),
               if (showActiveCategories) const ActiveCategories(),
-              SizedBox(height:10),
+              SizedBox(height:30),
             ],
           ),
         ),
