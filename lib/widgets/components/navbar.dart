@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wallpapper_studio_app/utils/route_generator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wallpapper_studio_app/data/navbar_data.dart';
 

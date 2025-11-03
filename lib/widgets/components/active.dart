@@ -67,9 +67,10 @@ class Active extends StatelessWidget {
                     // 📄 Main Content
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 30),
+                        padding: EdgeInsets.symmetric(vertical:MediaQuery.of(context).size.width < 500 ? 0 :30),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Image.asset(
                               'assets/images/active.png',

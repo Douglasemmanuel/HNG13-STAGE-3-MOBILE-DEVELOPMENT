@@ -5,6 +5,7 @@ import 'package:wallpapper_studio_app/widgets/components/navbar_drawer.dart';
 import 'package:wallpapper_studio_app/widgets/components/categories.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wallpapper_studio_app/widgets/components/active_categories.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BrowseScreen extends StatefulWidget {
   const BrowseScreen({super.key});
@@ -131,22 +132,31 @@ class _BrowseScreenState extends State<BrowseScreen> {
       mainAxisSize: MainAxisSize.min,
       children:  [
         IconButton(
-            onPressed: () => _onIconPressed(0),
-          icon: Icon(
-            Icons.grid_on_outlined, size: 24,
-           color: selectedIconIndex == 0
-                          ? Colors.amberAccent
-                          : Colors.black,
-          )),
+  onPressed: () => _onIconPressed(0),
+  icon: SvgPicture.asset(
+    'assets/images/SquaresFour.svg',
+    height: 40,
+    width: 40,
+    colorFilter: ColorFilter.mode(
+      selectedIconIndex == 0 ? Colors.amberAccent : Colors.black,
+      BlendMode.srcIn,
+    ),
+  ),
+),
+
         SizedBox(width: 4),
-       IconButton(
-            onPressed: () => _onIconPressed(1),
-          icon: Icon(
-            Icons.view_module_outlined, size: 24,
-           color: selectedIconIndex == 1
-                          ? Colors.amberAccent
-                          : Colors.black,
-          )),
+        IconButton(
+  onPressed: () => _onIconPressed(1),
+  icon: SvgPicture.asset(
+    'assets/images/Rows.svg',
+    height: 40,
+    width: 40,
+    colorFilter: ColorFilter.mode(
+      selectedIconIndex == 1 ? Colors.amberAccent.shade700 : Colors.black,
+      BlendMode.srcIn,
+    ),
+  ),
+),
       ],
     ),
   ],

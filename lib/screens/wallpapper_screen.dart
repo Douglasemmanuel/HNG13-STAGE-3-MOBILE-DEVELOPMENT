@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wallpapper_studio_app/utils/route_generator.dart';
 import 'package:wallpapper_studio_app/widgets/components/navbar.dart';
 import 'package:wallpapper_studio_app/widgets/components/navbar_drawer.dart';
-import 'package:google_fonts/google_fonts.dart';
 class WallpapperScreen extends StatelessWidget {
   const WallpapperScreen({super.key});
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wallpapper_studio_app/widgets/components/button.dart' ;
 
 class Categories extends StatelessWidget {
   const Categories({super.key});
@@ -49,13 +50,13 @@ class Categories extends StatelessWidget {
   Widget build(BuildContext context) {
   final screenWidth = MediaQuery.of(context).size.width;
 
-  int crossAxisCount = 3; // default for large screens
-  double containerWidth = 435; // default width
+  int crossAxisCount = 3; 
+  double containerWidth = 435; 
   if (screenWidth < 600) {
-    crossAxisCount = 1; // mobile
-    containerWidth = 400;   // reduce width for mobile
+    crossAxisCount = 1;
+    containerWidth = 400;   
   } else if (screenWidth < 1024) {
-    crossAxisCount = 2; // tablet
+    crossAxisCount = 2; 
   }
     return GridView.builder(
       itemCount: categoryList.length,
@@ -104,39 +105,20 @@ class Categories extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 110,
-                  height: 28,
-                  child: InkWell(
-                    onTap: () {
-                      print("${category['wallpaperCount']} pressed");
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 0.5),
-                        borderRadius: BorderRadius.circular(30),
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.grey.shade700.withAlpha((0.8 * 255).toInt()),
-                            Colors.grey.shade600.withAlpha((0.8 * 255).toInt()),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
+                Button(
+          theWidth: 110.0,
+
+          theHeight: 26.0,
+          theChild: Text(
                         category['wallpaperCount'],
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                         ),
-                      ),
-                    ),
-                  ),
+        ),
                 ),
+                
               ],
             ),
           ),
