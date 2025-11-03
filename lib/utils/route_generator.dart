@@ -5,6 +5,7 @@ import 'package:wallpapper_studio_app/screens/browse_screen.dart';
 import 'package:wallpapper_studio_app/screens/favourites_screen.dart';
 import 'package:wallpapper_studio_app/screens/wallpapper_screen.dart';
 import 'package:wallpapper_studio_app/screens/initial_screen.dart';
+import 'package:wallpapper_studio_app/screens/category_screen.dart' ;
 
 class RouteGenerator {
   static const String initial = '/' ;
@@ -13,6 +14,7 @@ class RouteGenerator {
   static const  String browse = '/browse' ;
   static const String favourites = '/favourites' ;
   static const  String wallpapper = '/wallpapper' ;
+  static const  String category = '/category' ;
 
 
   static Route<dynamic> generateRoute(RouteSettings settings){
@@ -29,6 +31,8 @@ class RouteGenerator {
         return  MaterialPageRoute(builder: (_)=> FavouritesScreen());
       case wallpapper:
         return  MaterialPageRoute(builder: (_)=> WallpapperScreen());
+      case category:
+        return  MaterialPageRoute(builder: (_)=> CategoryScreen());
       default:
       return _errorRoute();
     }

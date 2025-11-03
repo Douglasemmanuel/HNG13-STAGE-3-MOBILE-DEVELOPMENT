@@ -112,14 +112,20 @@ class InitialScreen extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    Text(
-                      'See All',
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 24,
-                        color: const Color(0xFF808080),
-                      ),
-                    ),
+                   GestureDetector(
+  onTap: () {
+   Navigator.pushNamed(context, RouteGenerator.category);
+  },
+  child: Text(
+    'See All',
+    style: GoogleFonts.poppins(
+      fontWeight: FontWeight.w400,
+      fontSize: 24,
+      color: const Color(0xFF808080),
+    ),
+  ),
+)
+
                   ],
                 ),
               ),
