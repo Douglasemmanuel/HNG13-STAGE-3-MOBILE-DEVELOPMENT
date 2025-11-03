@@ -2,9 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:wallpapper_studio_app/utils/route_generator.dart';
 import 'package:wallpapper_studio_app/widgets/components/navbar.dart';
 import 'package:wallpapper_studio_app/widgets/components/navbar_drawer.dart';
-class BrowseScreen extends StatelessWidget {
+import 'package:wallpapper_studio_app/widgets/components/categories.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:wallpapper_studio_app/widgets/components/active_categories.dart';
+
+class BrowseScreen extends StatefulWidget {
   const BrowseScreen({super.key});
 
+  @override
+  State<BrowseScreen> createState() => _BrowseScreenState();
+}
+
+class _BrowseScreenState extends State<BrowseScreen> {
+   bool showActiveCategories = false; 
+  int selectedIconIndex = 0;
+
+  void _onIconPressed(int index) {
+    setState(() {
+      selectedIconIndex = index;
+      showActiveCategories = index == 1; 
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final isSmallScreen = MediaQuery.of(context).size.width < 800;
@@ -60,10 +78,83 @@ class BrowseScreen extends StatelessWidget {
         ),
       ),
       body:SingleChildScrollView(
-        child: Center(
-          child:Text('Browse Screen') ,
+        child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _BrowserHeader(context),
+               if (!showActiveCategories) const Categories(),
+              if (showActiveCategories) const ActiveCategories(),
+              SizedBox(height:10),
+            ],
+          ),
         ),
         ),
     );
+  }
+
+  Widget _BrowserHeader(BuildContext context){
+    return Padding(
+      padding:const EdgeInsets.symmetric(vertical: 40),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(
+                      'assets/images/Browsecategories.png',
+                      height: 60,
+                      width: 560,
+                      fit: BoxFit.contain,
+                    ),
+                   const SizedBox(height: 5),
+                    Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    // Text on the left
+    Expanded(
+      child: Text(
+        'Explore our curated collections of stunning wallpapers',
+        style: GoogleFonts.poppins(
+          fontWeight: FontWeight.w400,
+          fontSize: 24,
+          color: const Color(0xFF575757),
+        ),
+      ),
+    ),
+
+    // Spacer between text and icons
+    const SizedBox(width: 16),
+
+    // Icons in a row on the right
+    Row(
+      mainAxisSize: MainAxisSize.min,
+      children:  [
+        IconButton(
+            onPressed: () => _onIconPressed(0),
+          icon: Icon(
+            Icons.grid_on_outlined, size: 24,
+           color: selectedIconIndex == 0
+                          ? Colors.amberAccent
+                          : Colors.black,
+          )),
+        SizedBox(width: 4),
+       IconButton(
+            onPressed: () => _onIconPressed(1),
+          icon: Icon(
+            Icons.view_module_outlined, size: 24,
+           color: selectedIconIndex == 1
+                          ? Colors.amberAccent
+                          : Colors.black,
+          )),
+      ],
+    ),
+  ],
+)
+
+        ],
+      ),
+    );
+
   }
 }

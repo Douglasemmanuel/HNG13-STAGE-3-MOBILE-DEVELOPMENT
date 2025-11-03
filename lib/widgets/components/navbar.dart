@@ -1,29 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wallpapper_studio_app/utils/route_generator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wallpapper_studio_app/data/navbar_data.dart';
 
-final List<Map<String, dynamic>> navbarItems = [
-  {
-    'icon': Icons.home_outlined,
-    'title': 'Home',
-    'link': RouteGenerator.home,
-  },
-  {
-    'icon': Icons.grid_on_outlined,
-    'title': 'Browse',
-    'link': RouteGenerator.browse,
-  },
-  {
-    'icon': Icons.favorite_outline,
-    'title': 'Favorites',
-    'link': RouteGenerator.favourites,
-  },
-  {
-    'icon': Icons.settings_outlined,
-    'title': 'Settings',
-    'link': RouteGenerator.setting,
-  },
-];
+
 
 class Navbar extends StatefulWidget {
   const Navbar({super.key});
@@ -63,7 +43,7 @@ class _NavbarState extends State<Navbar> {
                     setState(() {
                       _selectedIndex = index;
                     });
-                    Navigator.pushNamed(context, item['link']);
+                    Navigator.pushNamed(context, item.link);
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -84,10 +64,10 @@ class _NavbarState extends State<Navbar> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(item['icon'], size: 28, color: Colors.black87),
+                        Icon(item.icon, size: 28, color: Colors.black87),
                         const SizedBox(width: 10),
                         Text(
-                          item['title'],
+                          item.title,
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w400,
                             fontSize: 14,
