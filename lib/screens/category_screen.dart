@@ -1,11 +1,19 @@
+// ignore_for_file: non_constant_identifier_names
+
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:wallpapper_studio_app/utils/route_generator.dart';
 import 'package:wallpapper_studio_app/widgets/components/navbar.dart';
 import 'package:wallpapper_studio_app/widgets/components/navbar_drawer.dart';
+import 'package:wallpapper_studio_app/widgets/components/preview_wallpaper.dart';
+import 'package:wallpapper_studio_app/widgets/components/swtich_container.dart';
 import 'package:wallpapper_studio_app/widgets/components/wallpaper_category.dart'  ;
-import 'package:wallpapper_studio_app/widgets/components/preview.dart' ;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wallpapper_studio_app/widgets/components/custom_apbar.dart';
+import 'package:wallpapper_studio_app/widgets/components/radio_button.dart';
+import 'package:wallpapper_studio_app/widgets/components/wallpaper_setup.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
@@ -17,11 +25,34 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
    bool showActiveCategories = false; 
   int selectedIconIndex = 0;
+ int? selectedValue; // default = none selected
+  bool showPreview = false;
 
+  void _onRadioChanged(int? value) {
+    setState(() {
+      // 👇 toggle selection
+      if (selectedValue == value) {
+        selectedValue = null; // unselect if already selected
+      } else {
+        selectedValue = value;
+      }
+    });
+  }
   void _onIconPressed(int index) {
     setState(() {
       selectedIconIndex = index;
       showActiveCategories = index == 1; 
+    });
+  }
+  void _showPreview() {
+    setState(() {
+      showPreview = true;
+    });
+  }
+
+  void _hidePreview() {
+    setState(() {
+      showPreview = false;
     });
   }
   @override
@@ -29,55 +60,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
        final isSmallScreen = MediaQuery.of(context).size.width < 800;
     return Scaffold(
        endDrawer: isSmallScreen ? const NavbarDrawer() : null,
-     appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            border: Border(
-              bottom: BorderSide(
-                color: Colors.grey, 
-                width: 1,           
-              ),
-            ),
-          ),
-          child: AppBar(
-            backgroundColor: Colors.transparent, 
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, RouteGenerator.initial); 
-                  },
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    height: 61,
-                    width: 185,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-
-                const SizedBox(width: 20),
-                if (!isSmallScreen) const Navbar(),
-              ],
-            ),
-            actions: [
-              if (isSmallScreen)
-                Builder(
-                  builder: (context) => IconButton(
-                    icon: const Icon(Icons.menu, size: 32, color: Colors.black),
-                    onPressed: () {
-                      Scaffold.of(context).openEndDrawer();
-                    },
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ),
+    appBar:CustomAppBar(isSmallScreen: isSmallScreen) ,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal:10 , vertical: 20),
@@ -86,8 +69,51 @@ class _CategoryScreenState extends State<CategoryScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
                 _Nature(context),
-                PreviewWallpaper(),
-            ],),
+                //  WallpaperSetup(),
+                if (!isSmallScreen) PreviewWallpaper(onPreviewPressed: _showPreview),
+            if (showPreview)
+            Center(
+              child: GestureDetector(
+                onTap: _hidePreview,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5, // 40% of screen width
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                    child: Container(
+                      color: Colors.black.withOpacity(0.3),
+                      alignment: Alignment.center,
+                      child: WallpaperSetup(
+                        onClose: _hidePreview,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+      // The overlay with blur
+      // Positioned.fill(
+      //   child: GestureDetector(
+      //     onTap: _hidePreview,
+      //     child: BackdropFilter(
+      //       filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+      //       child: Container(
+      //         color: Colors.black.withOpacity(0.3),
+      //         alignment: Alignment.center,
+      //         child: ConstrainedBox(
+      //           constraints: BoxConstraints(
+      //             maxWidth: MediaQuery.of(context).size.width * 0.6,
+      //           ),
+      //           child: WallpaperSetup(
+      //             onClose: _hidePreview,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
+          
+            ],
+            ),
       ),
       ),
     );
@@ -96,10 +122,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
 
 
-  Widget _Nature(BuildContext context){
+  Widget _Nature (BuildContext context){
     return  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
   children: [
@@ -175,8 +201,68 @@ class _CategoryScreenState extends State<CategoryScreen> {
     ),
         ],
     ),
-    WallpaperCategory(),
+  // WallpaperCategory()
+    // Expanded(child: WallpaperCategory(),),
+    // WallpaperCategory(),
         ],
     );
   }
+
+
+
+
+  void showCustomDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: true, 
+    builder: (BuildContext context) {
+      return Dialog(
+        backgroundColor: Colors.transparent, 
+        insetPadding: const EdgeInsets.only(
+          top: 115, 
+          left: 20, 
+          right: 20,
+          bottom: 20, 
+        ),
+        child: Container(
+          width: 400,
+          height: 1231.9947509765625,
+          padding: const EdgeInsets.all(40),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFFFFFF), 
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Example content
+              Text(
+                'Custom Modal Title',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 24), // gap
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Your modal content goes here. You can add widgets, buttons, lists, or anything inside.',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      // more content here
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
 }

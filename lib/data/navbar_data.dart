@@ -5,7 +5,7 @@ final List<NavbarItem> navbarItems = [
   NavbarItem(
     icon: Icons.home_outlined,
     title: 'Home',
-    link: RouteGenerator.home,
+    link: RouteGenerator.initial,
   ),
   NavbarItem(
     icon: Icons.grid_on_outlined,

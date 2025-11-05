@@ -3,11 +3,10 @@ import 'dart:ui';
 
 class Button extends StatelessWidget {
   const Button(
-      {Key? key,
+      {super.key,
       required this.theWidth,
       required this.theHeight,
-      required this.theChild})
-      : super(key: key);
+      required this.theChild});
 
   final theWidth;
   final theHeight;

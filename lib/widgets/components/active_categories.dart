@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wallpapper_studio_app/widgets/components/button.dart' ;
 
 final List<dynamic> categoryList = const [
   {

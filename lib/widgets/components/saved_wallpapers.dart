@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallpapper_studio_app/widgets/components/button.dart' ;
+import 'package:wallpapper_studio_app/widgets/components/button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
