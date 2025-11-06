@@ -8,7 +8,8 @@ import 'package:wallpapper_studio_app/widgets/components/swtich_container.dart';
 import 'dart:ui';
 class WallpaperSetup extends StatefulWidget {
   final VoidCallback onClose;
-  const WallpaperSetup({super.key, required this.onClose});
+   final bool showPreview;
+  const WallpaperSetup({super.key, required this.onClose , required this.showPreview});
 
   @override
   State<WallpaperSetup> createState() => _WallpaperSetupState();
@@ -29,14 +30,14 @@ class _WallpaperSetupState extends State<WallpaperSetup> {
   }
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+    // final screenWidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 1),
       child: Container(
         color: Colors.white,
-        //  width: screenWidth * 0.9,
+        //  width: widget.showPreview ? screenWidth * 0.4 : 0,
         child: Padding(
-          padding: EdgeInsetsGeometry.all(10),
+          padding: EdgeInsetsGeometry.symmetric(vertical: 10 , horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

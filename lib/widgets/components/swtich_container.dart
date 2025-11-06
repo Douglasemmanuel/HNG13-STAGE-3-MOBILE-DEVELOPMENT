@@ -13,12 +13,21 @@ class _SwitchContainerExampleState extends State<SwitchContainerExample> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Responsive font sizes
+    final headerFontSize = screenWidth < 800 ? 14.0 : 16.0;
+    final titleFontSize = screenWidth < 800 ? 12.0 : 14.0;
+
+    // Responsive spacing between text and switch
+    final switchSpacing = screenWidth < 800 ? 8.0 : 20.0;
+
     return Container(
-      width: 569,
+      width: screenWidth < 800 ? screenWidth * 0.9 : 569,
       height: 92,
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       decoration: BoxDecoration(
-        color:  Colors.white,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: Colors.grey,
@@ -26,33 +35,37 @@ class _SwitchContainerExampleState extends State<SwitchContainerExample> {
         ),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Head + Title Text Column
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Auto - Rotation",
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color:  Colors.black,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Auto - Rotation",
+                  style: GoogleFonts.poppins(
+                    fontSize: headerFontSize,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                "Automatically change your wallpaper at regular intervals",
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color:  Colors.grey,
+                const SizedBox(height: 4),
+                Text(
+                  "Automatically change your wallpaper at regular intervals",
+                  style: GoogleFonts.poppins(
+                    fontSize: titleFontSize,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey,
+                  ),
+                  softWrap: true,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
+
+          SizedBox(width: switchSpacing),
 
           // Switch Button
           Switch(

@@ -1,117 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wallpapper_studio_app/provider/favourites_provider.dart';
 import 'package:wallpapper_studio_app/widgets/components/button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wallpapper_studio_app/data/wallpaper_dart.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
-// class WallpaperCategory extends StatefulWidget {
-//   const WallpaperCategory({super.key});
+class WallpaperCategory extends ConsumerWidget {
 
-//   @override
-//   State<WallpaperCategory> createState() => _WallpaperCategoryState();
-// }
-
-// class _WallpaperCategoryState extends State<WallpaperCategory> {
-//   @override
-//   Widget build(BuildContext context) {
-//     final screenWidth = MediaQuery.of(context).size.width;
-
-//     int crossAxisCount = 6;
-//     if (screenWidth < 600) {
-//       crossAxisCount = 2;
-//     } else if (screenWidth < 1024) {
-//       crossAxisCount = 4;
-//     }
-
-//     return GridView.count(
-//       crossAxisCount: crossAxisCount,
-//       crossAxisSpacing: 16,
-//       mainAxisSpacing: 16,
-//       padding: const EdgeInsets.all(16),
-//       shrinkWrap: true,
-//       physics: const NeverScrollableScrollPhysics(),
-//       children: wallpapers.map((wallpaper) {
-//         return Container(
-//           width: 190,
-//           height: 290,
-//           decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(20),
-//             image: DecorationImage(
-//               image: AssetImage(wallpaper.imagePath),
-//               fit: BoxFit.cover,
-//             ),
-//           ),
-//           child: Padding(
-//             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.end,
-//                   children: [
-//                     // SvgPicture.asset(
-//                     //   'assets/images/liked.svg',
-//                     //   height: 40,
-//                     //   width: 40,
-//                     //   fit: BoxFit.contain,
-//                     // ),
-//                     SvgPicture.asset(
-//                       'assets/images/unliked.svg',
-//                       height: 40,
-//                       width: 40,
-//                       fit: BoxFit.contain,
-//                     ),
-//                   ],
-//                 ),
-//                 const Spacer(),
-//                 Text(
-//                   wallpaper.title,
-//                   style: GoogleFonts.poppins(
-//                     fontWeight: FontWeight.w600,
-//                     fontSize: 20,
-//                     color: Colors.white,
-//                   ),
-//                 ),
-//                 const SizedBox(height: 5),
-//                 Button(
-//                   theWidth: 72.0,
-//                   theHeight: 25.0,
-//                   theChild: Text(
-//                     wallpaper.buttonTitle,
-//                     style: const TextStyle(
-//                       color: Colors.white,
-//                       fontSize: 14,
-//                       fontWeight: FontWeight.w400,
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         );
-//       }).toList(),
-//     );
-//   }
-// }
-
-
-
-
-class WallpaperCategory extends StatelessWidget {
-  const WallpaperCategory({super.key});
+  const WallpaperCategory({super.key });
 
   @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true, // allows ListView inside another scrollable
-      physics: const NeverScrollableScrollPhysics(), // prevents nested scroll issues
+  Widget build(BuildContext context ,WidgetRef ref) {
+ final favorites = ref.watch(favoritesProvider);
+    return GridView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: wallpapers.length,
+      shrinkWrap: true, // crucial for nested scrollables
+      physics: const NeverScrollableScrollPhysics(), 
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3, // number of columns in the grid
+        crossAxisSpacing: 16, // horizontal spacing
+        mainAxisSpacing: 16, // vertical spacing
+        childAspectRatio: 0.7, // adjust for image height vs width
+      ),
       itemBuilder: (context, index) {
         final wallpaper = wallpapers[index];
-
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
+          final isFav = favorites.any((w) => w.imagePath == wallpaper.imagePath);
+        return GestureDetector(
+           onTap: () {},
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Stack(
@@ -120,7 +39,6 @@ class WallpaperCategory extends StatelessWidget {
                 // Wallpaper image
                 Image.asset(
                   wallpaper.imagePath,
-                  height: 290,
                   fit: BoxFit.cover,
                 ),
                 // Overlay content
@@ -132,10 +50,21 @@ class WallpaperCategory extends StatelessWidget {
                     children: [
                       Align(
                         alignment: Alignment.topRight,
-                        child: SvgPicture.asset(
-                          'assets/images/unliked.svg',
-                          height: 40,
-                          width: 40,
+                        child: GestureDetector(
+                          onTap: () {
+                            ref
+                                .read(favoritesProvider.notifier)
+                                .toggleFavorite(wallpaper);
+                          },
+                          child: SvgPicture.asset(
+                             isFav ?
+          
+                            'assets/images/liked.svg'
+                            :
+                            'assets/images/unliked.svg',
+                            height: 40,
+                            width: 40,
+                          ),
                         ),
                       ),
                       const Spacer(),
@@ -151,10 +80,13 @@ class WallpaperCategory extends StatelessWidget {
                       SizedBox(
                         width: 72,
                         height: 25,
-                        child: Button(
-                          theWidth: 72.0,
-                          theHeight: 25.0,
-                          theChild: Text(
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black45,
+                            padding: EdgeInsets.zero,
+                          ),
+                          child: Text(
                             wallpaper.buttonTitle,
                             style: const TextStyle(
                               color: Colors.white,

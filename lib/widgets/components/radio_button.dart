@@ -26,10 +26,16 @@ class _RadioContainerExampleState extends State<RadioContainerExample> {
   Widget build(BuildContext context) {
     bool isSelected = widget.selectedValue == widget.value;
 
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Change font size based on screen width
+    final titleFontSize = screenWidth < 800 ? 12.0 : 14.0;
+    final headerFontSize = screenWidth < 800 ? 14.0 : 16.0;
+
     return GestureDetector(
       onTap: () => widget.onChanged(widget.value),
       child: Container(
-        width: 569,
+        width: screenWidth < 800 ? screenWidth * 0.9 : 569,
         height: 69,
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
         decoration: BoxDecoration(
@@ -40,58 +46,50 @@ class _RadioContainerExampleState extends State<RadioContainerExample> {
             width: 0.2,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(1.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-            width: 24,
-            height: 24,
-            child: Radio<int>(
-              value: widget.value,
-              groupValue: widget.selectedValue,
-              fillColor: MaterialStateProperty.resolveWith<Color>(
-                (states) => isSelected ? const Color(0xFFFBB03B) : Colors.grey,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 24,
+              height: 24,
+              child: Radio<int>(
+                value: widget.value,
+                groupValue: widget.selectedValue,
+                fillColor: MaterialStateProperty.resolveWith<Color>(
+                  (states) => isSelected ? const Color(0xFFFBB03B) : Colors.grey,
+                ),
+                onChanged: widget.onChanged,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
-              onChanged: widget.onChanged,
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap, // removes extra padding
             ),
-          ),
-              // Radio<int>(
-              //   value: widget.value,
-              //   groupValue: widget.selectedValue,
-              //   fillColor: MaterialStateProperty.resolveWith<Color>(
-              //     (states) => isSelected ? const Color(0xFFFBB03B) : Colors.grey,
-              //   ),
-              //   onChanged: widget.onChanged,
-              // ),
-              SizedBox(width: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    widget.header,
-                    style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
+            const SizedBox(width: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  widget.header,
+                  style: GoogleFonts.poppins(
+                    fontSize: headerFontSize,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
                   ),
-                  const SizedBox(height: 1),
-                  Text(
-                    widget.title,
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey,
-                    ),
+                ),
+                const SizedBox(height: 1),
+                Text(
+                  widget.title,
+                  style: GoogleFonts.poppins(
+                    fontSize: titleFontSize,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey,
                   ),
-                ],
-              ),
-            ],
-          ),
+                  softWrap: true,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
