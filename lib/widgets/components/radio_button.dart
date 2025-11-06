@@ -9,13 +9,13 @@ class RadioContainerExample extends StatefulWidget {
   final ValueChanged<int?> onChanged;
 
   const RadioContainerExample({
-    Key? key,
+    super.key,
     required this.header,
     required this.title,
     required this.value,
     required this.selectedValue,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<RadioContainerExample> createState() => _RadioContainerExampleState();
@@ -55,7 +55,7 @@ class _RadioContainerExampleState extends State<RadioContainerExample> {
               child: Radio<int>(
                 value: widget.value,
                 groupValue: widget.selectedValue,
-                fillColor: MaterialStateProperty.resolveWith<Color>(
+                fillColor: WidgetStateProperty.resolveWith<Color>(
                   (states) => isSelected ? const Color(0xFFFBB03B) : Colors.grey,
                 ),
                 onChanged: widget.onChanged,

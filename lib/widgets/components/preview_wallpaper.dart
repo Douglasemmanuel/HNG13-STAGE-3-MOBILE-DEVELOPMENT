@@ -92,14 +92,14 @@ class PreviewWallpaper extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 4 , vertical: 4),
                     child: TextButton(
               style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(const Size(72, 40)), // ensures fixed width & height
-                padding: MaterialStateProperty.all(
+                minimumSize: WidgetStateProperty.all(const Size(72, 40)), // ensures fixed width & height
+                padding: WidgetStateProperty.all(
                   const EdgeInsets.symmetric(horizontal: 12, vertical: 4), // centers text vertically
                 ),
-                backgroundColor: MaterialStateProperty.all(
+                backgroundColor: WidgetStateProperty.all(
                   const Color(0x33BFBFBF),
                 ),
-                shape: MaterialStateProperty.all(
+                shape: WidgetStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),
                   ),

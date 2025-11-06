@@ -9,13 +9,13 @@ class CustomButtonRow extends StatelessWidget {
   final bool reverseOrder; // to control which button comes first
 
   const CustomButtonRow({
-    Key? key,
+    super.key,
     required this.firstButtonText,
     required this.secondButtonText,
     required this.onFirstPressed,
     required this.onSecondPressed,
     this.reverseOrder = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

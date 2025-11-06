@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SwitchContainerExample extends StatefulWidget {
-  const SwitchContainerExample({Key? key}) : super(key: key);
+  const SwitchContainerExample({super.key});
 
   @override
   _SwitchContainerExampleState createState() => _SwitchContainerExampleState();
@@ -70,7 +70,7 @@ class _SwitchContainerExampleState extends State<SwitchContainerExample> {
           // Switch Button
           Switch(
             value: isSwitched,
-            activeColor: Colors.white,
+            activeThumbColor: Colors.white,
             activeTrackColor: const Color(0xFFFBB03B),
             inactiveThumbColor: Colors.grey,
             inactiveTrackColor: Colors.grey.shade300,

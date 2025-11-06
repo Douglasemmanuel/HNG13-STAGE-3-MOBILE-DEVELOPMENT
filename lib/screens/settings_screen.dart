@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:wallpapper_studio_app/utils/route_generator.dart';
 import 'package:wallpapper_studio_app/widgets/components/navbar.dart';
@@ -18,6 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final isSmallScreen = MediaQuery.of(context).size.width < 800;
+    // log(message)
     return Scaffold(
       endDrawer: isSmallScreen ? const NavbarDrawer() : null,
      appBar:CustomAppBar(isSmallScreen: isSmallScreen),
@@ -220,7 +223,7 @@ Widget _buildContainer(BuildContext context) {
                               isSwitched = value;
                             });
                           },
-                          activeColor: Colors.white,
+                          activeThumbColor: Colors.white,
                           activeTrackColor: const Color(0xFFFBB03B),
                           inactiveThumbColor: Colors.grey,
                           inactiveTrackColor: Colors.grey.shade300,
@@ -452,7 +455,7 @@ Widget _buildContainer(BuildContext context) {
         isSwitched = value;
       });
     },
-    activeColor: Colors.white,
+    activeThumbColor: Colors.white,
     activeTrackColor: const Color(0xFFFBB03B),
     inactiveThumbColor: Colors.grey,
     inactiveTrackColor: Colors.grey.shade300,

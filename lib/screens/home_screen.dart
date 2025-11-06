@@ -5,7 +5,6 @@ import 'package:wallpapper_studio_app/widgets/components/navbar.dart';
 import 'package:wallpapper_studio_app/widgets/components/navbar_drawer.dart';
 import 'package:wallpapper_studio_app/widgets/components/active.dart';
 import 'package:wallpapper_studio_app/utils/route_generator.dart';
-import 'package:wallpapper_studio_app/widgets/components/custom_apbar.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 

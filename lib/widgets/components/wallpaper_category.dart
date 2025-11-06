@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallpapper_studio_app/provider/favourites_provider.dart';
-import 'package:wallpapper_studio_app/widgets/components/button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wallpapper_studio_app/data/wallpaper_dart.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 class WallpaperCategory extends ConsumerWidget {
 
